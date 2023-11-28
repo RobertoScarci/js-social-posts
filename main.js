@@ -63,12 +63,20 @@ posts.forEach((element, index) => {
 })
 
 
-const likeButton = document.querySelector('a.like-button')
-const textBlue = document.querySelector('a.like-button')
-const counterLike = document.querySelector('b#like-counter-1')
+const likeButton = document.querySelectorAll(".js-like-button");
+const textBlue = document.querySelector('span.like-button')
 
-likeButton.addEventListener('click', function(){
-    changeColor(textBlue)
+
+likeButton.forEach((button) => {
+    button.addEventListener("click", () => {
+        const likeCounter = document.querySelector(`b#like-counter`);
+        if (button.classList.contains("bg-blue")) {
+            likeCounter.innerHTML = parseInt(likeCounter.innerHTML) - 1;
+        } else {
+            likeCounter.innerHTML = parseInt(likeCounter.innerHTML) + 1;
+        }
+        button.classList.toggle("bg-blue");
+    });
 })
 
 
@@ -96,20 +104,16 @@ function generateNewPost( text, img, name, profile, like, date){
 <div class="post__footer">
     <div class="likes js-likes">
         <div class="likes__cta">
-            <a class="like-button  js-like-button" href="#" data-postid="1">
+            <span class="like-button  js-like-button" href="#" data-postid="1">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                 <span class="like-button__label">${like} Mi Piace</span>
-            </a>
+            </span>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">${like} </b> persone
+            Piace a <b id="like-counter" class="js-likes-counter"> ${like} </b> persone
         </div>
     </div> 
 </div>
 </div>
 `
-}
-
-function changeColor( text) {
-    text.classList.add('bg-blue')
 }
