@@ -37,7 +37,7 @@ h1 {
 }
 
 .post__header {
-    margin-bottom: 16px;
+    padding: 1rem;
 }
 
 .post-meta {
@@ -60,6 +60,7 @@ h1 {
 
 .post-meta__time {
     font-size: 0.8rem;
+    padding-top: .2rem;
 }
 
 .profile-pic {
@@ -122,4 +123,8 @@ h1 {
 .like-button--liked {
     color: #0CD977;
     cursor: default;
+}
+
+.bg-blue{
+    color: rgb(88, 88, 248);
 }

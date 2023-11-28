@@ -8,7 +8,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "created": "2021-06-25"
+        "created": "25-06-2021"
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "03-09-2021"
     },
     {
         "id": 3,
@@ -30,7 +30,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "2021-05-15"
+        "created": "15-05-2021"
     },
     {
         "id": 4,
@@ -38,10 +38,10 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=24",
         "author": {
             "name": "Luca Formicola",
-            "image": null
+            "image": "https://unsplash.it/300/300?image=35"
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "03-04-2021"
     },
     {
         "id": 5,
@@ -52,24 +52,33 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "2021-03-05"
+        "created": "05-03-2021"
     }
 ];
 
-const output = document.querySelector('div.post')
+const output = document.querySelector('div#container')
 
 posts.forEach((element, index) => {
-    output.innerHTML += generateNewPost(element.content, element.media, element.name, element.image, element.likes, element.created, index);
+    output.innerHTML += generateNewPost(element.content, element.media, element.author.name, element.author.image, element.likes, element.created, index);
 })
 
 
+const likeButton = document.querySelector('a.like-button')
+const textBlue = document.querySelector('a.like-button')
+const counterLike = document.querySelector('b#like-counter-1')
+
+likeButton.addEventListener('click', function(){
+    changeColor(textBlue)
+})
 
 
 
 
 // ====Function====
 function generateNewPost( text, img, name, profile, like, date){
-    return `<div class="post__header">
+    return `
+    <div class="post">
+    <div class="post__header">
     <div class="post-meta">                    
         <div class="post-meta__icon">
             <img class="profile-pic" src="${profile}"" alt="Phil Mangione">                    
@@ -89,12 +98,18 @@ function generateNewPost( text, img, name, profile, like, date){
         <div class="likes__cta">
             <a class="like-button  js-like-button" href="#" data-postid="1">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                <span class="like-button__label">${like}Mi Piace</span>
+                <span class="like-button__label">${like} Mi Piace</span>
             </a>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter-1" class="js-likes-counter">80</b> persone
+            Piace a <b id="like-counter-1" class="js-likes-counter">${like} </b> persone
         </div>
     </div> 
-</div>`
+</div>
+</div>
+`
+}
+
+function changeColor( text) {
+    text.classList.add('bg-blue')
 }
