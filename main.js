@@ -63,21 +63,23 @@ posts.forEach((element, index) => {
 })
 
 
-const likeButton = document.querySelectorAll(".js-like-button");
-const textBlue = document.querySelector('span.like-button')
+const likeButton = document.querySelectorAll("span.like-button.js-like-button");
+const likeCounterList = document.querySelectorAll('.js-likes-counter')
 
 
-likeButton.forEach((button) => {
-    button.addEventListener("click", () => {
-        const likeCounter = document.querySelector(`b#like-counter`);
-        if (button.classList.contains("bg-blue")) {
-            likeCounter.innerHTML = parseInt(likeCounter.innerHTML) - 1;
-        } else {
-            likeCounter.innerHTML = parseInt(likeCounter.innerHTML) + 1;
-        }
-        button.classList.toggle("bg-blue");
-    });
-})
+for(let i = 0; i < likeButton.length; i++){
+    const currentLikeButton = likeButton[i]
+    currentLikeButton.addEventListener('click', function(event){
+        event.preventDefault();
+       if (currentLikeButton.classList.contains('like-button--liked')){
+        currentLikeButton.classList.remove('like-button--liked')
+        likeCounterList[i].innerHTML = parseInt(likeCounterList[i].innerHTML) - 1;
+       } else {
+        currentLikeButton.classList.add('like-button--liked')
+        likeCounterList[i].innerHTML = parseInt(likeCounterList[i].innerHTML) + 1;
+       }
+    })
+}
 
 
 
@@ -106,11 +108,11 @@ function generateNewPost( text, img, name, profile, like, date){
         <div class="likes__cta">
             <span class="like-button  js-like-button" href="#" data-postid="1">
                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                <span class="like-button__label">${like} Mi Piace</span>
+                <span class="like-button__label"> Mi Piace</span>
             </span>
         </div>
         <div class="likes__counter">
-            Piace a <b id="like-counter" class="js-likes-counter"> ${like} </b> persone
+            Piace a <b id="like-counter-${posts.id}" class="js-likes-counter"> ${like} </b> persone
         </div>
     </div> 
 </div>
